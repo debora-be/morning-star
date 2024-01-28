@@ -1,0 +1,36 @@
+version: "3"
+services:
+  morning_star:
+    container_name: morning_star
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "4000:4000"
+    depends_on:
+      - mariadb
+    networks:
+      - morning_star_network
+
+  mariadb:
+    container_name: mariadb
+    image: mariadb:10.5
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpassword
+      MYSQL_DATABASE: morning_star_db
+      MYSQL_USER: morning_star
+      MYSQL_PASSWORD: morning_pass
+    ports:
+      - "3306:3306"
+    volumes:
+      - mariadb_data:/var/lib/mysql
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+    networks:
+      - morning_star_network
+
+networks:
+  morning_star_network:
+    name: morning_star_network
+
+volumes:
+  mariadb_data:
