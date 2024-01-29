@@ -33,6 +33,4 @@ RUN mkdir -p /root/.ssh \
 
 RUN mix do deps.get, deps.compile
 
-RUN mix compile
-
 CMD ["mix", "phx.server"]
