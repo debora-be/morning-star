@@ -36,12 +36,12 @@ defmodule MorningStar.Parsers.ParseVenusData do
 
   defp extract_image_details(item) do
     data = List.first(item["data"])
-    random_link = Enum.random(item["links"])["href"]
+    link = Enum.random(item["links"])["href"]
 
     %{
       date_created: data["date_created"],
       description: data["description"],
-      link: random_link
+      link: link
     }
   end
 end
