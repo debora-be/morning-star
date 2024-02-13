@@ -2,23 +2,22 @@ defmodule MorningStar.Parsers.ParseVenusData do
   @moduledoc """
   This module is responsible for parsing the data returned from the NASA API.
   """
-  alias HTTPoison
+
+  require Logger
 
   @doc """
-  Parses the data returned from the NASA API for a given period.
+  Parses the provided data for a given period, extracting date_created, description, and a random related image.
   """
-  @spec parse_data_for_period(Date.t(), Date.t(), map()) :: list()
-  def parse_data_for_period(period_start, period_end, response_data) do
-    response_data
-    |> get_items_within_period(period_start, period_end)
-    |> extract_image_details()
+  @spec parse_data_for_period(Date.t(), Date.t(), list()) :: [map()]
+  def parse_data_for_period(period_start, period_end, items) do
+    items
+    |> Enum.filter(&item_within_period?(&1, period_start, period_end))
+    |> Enum.map(&extract_image_details/1)
   end
 
-  defp get_items_within_period(items, period_start, period_end) do
-    Enum.filter(items, fn item ->
-      date = get_date_from_item(item)
-      Date.compare(date, period_start) != :lt and Date.compare(date, period_end) != :gt
-    end)
+  defp item_within_period?(item, period_start, period_end) do
+    date = get_date_from_item(item)
+    date && Date.compare(date, period_start) != :lt && Date.compare(date, period_end) != :gt
   end
 
   defp get_date_from_item(item) do
@@ -30,27 +29,19 @@ defmodule MorningStar.Parsers.ParseVenusData do
 
   defp parse_date_from_datetime(datetime) do
     case DateTime.from_iso8601(datetime) do
-      {:ok, datetime, _} -> datetime |> DateTime.to_date()
-      {:error, _} -> parse_date_only(datetime)
+      {:ok, datetime, _} -> DateTime.to_date(datetime)
+      {:error, _} -> nil
     end
   end
 
-  def parse_date_only(datetime) do
-    case String.split(datetime, "T") do
-      [date_str | _] -> Date.from_iso8601(date_str)
-      _ -> nil
-    end
-  end
+  defp extract_image_details(item) do
+    data = List.first(item["data"])
+    random_link = Enum.random(item["links"])["href"]
 
-  defp extract_image_details(items) do
-    Enum.map(items, fn item ->
-      data = List.first(item["data"])
-      link = List.first(item["links"])["href"]
-
-      %{
-        title: data["title"],
-        link: link
-      }
-    end)
+    %{
+      date_created: data["date_created"],
+      description: data["description"],
+      link: random_link
+    }
   end
 end
