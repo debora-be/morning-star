@@ -18,6 +18,21 @@ services:
     environment:
       - MIX_ENV=dev  
     command: mix phx.server  
+    
+  morning_star_test:
+    container_name: morning_star_test
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - .:/app
+      - morning_star_deps:/app/deps
+      - morning_star_build:/app/_build
+    networks:
+      - morning_star_network
+    environment:
+      - MIX_ENV=test
+    command: mix test  
 
   mariadb:
     container_name: mariadb
