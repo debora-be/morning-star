@@ -36,7 +36,7 @@ docker exec -it mariadb mysql -u root -prootpassword
 * Grant the necessary permissions to the morning_star user:
 
 ```sql
-GRANT ALL PRIVILEGES ON morning_star_dev.* TO 'morning_star'@'%';
+GRANT ALL PRIVILEGES ON *.* TO 'morning_star'@'%' WITH GRANT OPTION;
 FLUSH PRIVILEGES;
 ```
 
