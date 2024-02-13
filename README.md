@@ -43,5 +43,5 @@ FLUSH PRIVILEGES;
 * From now on, the applications`s shell can be accessed with:
 
 ```bash
-docker exec -it morning_star bash
+docker exec -it morning_star ash
 ```
