@@ -15,9 +15,17 @@ Morning Star is an Elixir-based web application designed to fetch and store astr
 `Dockerfile` sets up the Elixir environment.
 `docker-compose.yml` orchestrates the Elixir app and MariaDB service setup.
 
+## Running the application
+
+Start the project with:
+
+```bash
+docker compose up --build -d
+```
+
 ### Database initialization
 
-These manual steps are required once to set up the MariaDB user:
+These manual steps are required only once to set up the MariaDB user:
 
 * Access the MariaDB Docker container:
 
@@ -32,12 +40,8 @@ GRANT ALL PRIVILEGES ON morning_star_dev.* TO 'morning_star'@'%';
 FLUSH PRIVILEGES;
 ```
 
-## Running the application
-
-Start the project using Docker Compose:
+* From now on, the applications`s shell can be accessed with:
 
 ```bash
-docker compose up --build
+docker exec -it morning_star bash
 ```
-
-The application will be accessible at http://localhost:4000
