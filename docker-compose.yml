@@ -9,8 +9,15 @@ services:
       - "4000:4000"
     depends_on:
       - mariadb
+    volumes:
+      - .:/app  
+      - morning_star_deps:/app/deps  
+      - morning_star_build:/app/_build  
     networks:
       - morning_star_network
+    environment:
+      - MIX_ENV=dev  
+    command: mix phx.server  
 
   mariadb:
     container_name: mariadb
@@ -28,9 +35,11 @@ services:
     networks:
       - morning_star_network
 
+volumes:
+  mariadb_data:
+  morning_star_deps:  
+  morning_star_build:
+
 networks:
   morning_star_network:
     name: morning_star_network
-
-volumes:
-  mariadb_data:
