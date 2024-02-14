@@ -33,6 +33,4 @@ RUN mkdir -p /root/.ssh \
 
 RUN mix do deps.get, deps.compile
 
-RUN mix compile
-
-CMD ["mix", "phx.server"]
+CMD ["sh", "-c", "mix phx.server && mix run -e 'MorningStar.Utils.JSONLoader.load_json_to_db'"]

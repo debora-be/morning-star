@@ -14,6 +14,7 @@ config :morning_star,
   password: "morning_pass",
   database: "morning_star_db",
   hostname: "mariadb",
+  pool: Ecto.Adapters.SQL.Sandbox,
   pool_size: 10
 
 # Configures the endpoint

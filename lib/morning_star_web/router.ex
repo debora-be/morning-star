@@ -5,6 +5,22 @@ defmodule MorningStarWeb.Router do
     plug :accepts, ["json"]
   end
 
+  pipeline :graphql do
+    plug :accepts, ["json"]
+  end
+
+  scope "/v1/graphql" do
+    pipe_through [:api, :graphql]
+
+    if Mix.env() == :dev do
+      forward "/ui", Absinthe.Plug.GraphiQL,
+        interface: :playground,
+        schema: MorningStarWeb.Schema
+    end
+
+    forward "/", Absinthe.Plug, schema: MorningStarWeb.Schema
+  end
+
   scope "/api", MorningStarWeb do
     pipe_through :api
   end
