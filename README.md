@@ -2,7 +2,7 @@
 
 ## Overview
 
-Embark on a cosmic journey with Morning Star, your gateway to the celestial wonders of Venus! This application searches for breathtaking images of Venus and intertwining them with enthralling myths of love and beauty from Roman lore. Gaze upon the skies through the lens of NASA's finest, and delve into tales as old as time itself, all served in a sleek GraphQL API.
+Embark on a cosmic journey with Morning Star, your gateway to the celestial wonders of Venus! This application searches for breathtaking images of Venus and intertwining them with enthralling myths of love and beauty from the Roman lore and its medieval interpretations. Gaze upon the skies through the lens of NASA's finest, and delve into tales as old as time itself, all served in a sleek GraphQL API.
 
 ## Prerequisites
 
@@ -41,7 +41,7 @@ FLUSH PRIVILEGES;
 Exit db shell; from this moment forth, step into the application's command center with:
 
 ```bash
-docker compose up -d && docker compose run morning_star mix phx.server && docker exec -it morning_star ash
+docker compose up -d && docker exec -it morning_star ash
 ```
 
 We just achieved the realms of response, _a.k.a_
@@ -50,8 +50,8 @@ We just achieved the realms of response, _a.k.a_
 ## Queries and expectations
 
 ```graphql
-query GetVenusImages($startDate: String!, $endDate: String!) {
-  getVenusImages(startDate: $startDate, endDate: $endDate) {
+query getVenusImage($startDate: String!, $endDate: String!) {
+  getVenusImage(startDate: $startDate, endDate: $endDate) {
     dateCreated
     description
     imageUrl
@@ -80,6 +80,8 @@ success
 docker compose run morning_star_test mix test
 ```
 
-### A tiny detail
+### Tiny details
 
 When we try to query for recent images, we might not get any response. This is because the NASA API does not have any recent images of Venus. Every single image was worshiped and adored, and now they are all gone. We can only hope that the next image will be as beautiful as the ones we have seen so far.
+
+The article that is returned in the response comes from [SciHub](https://sci-hub.wf/10.2307/27707955).
