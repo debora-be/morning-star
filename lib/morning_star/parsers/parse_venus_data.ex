@@ -41,6 +41,7 @@ defmodule MorningStar.Parsers.ParseVenusData do
     %{
       date_created: data["date_created"],
       description: data["description"],
+      title: data["title"],
       link: link
     }
   end

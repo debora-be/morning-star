@@ -2,7 +2,7 @@
 
 ## Overview
 
-Embark on a cosmic journey with Morning Star, your gateway to the celestial wonders of Venus! This application searches for breathtaking images of Venus and intertwining them with enthralling myths of love and beauty from Roman lore. Gaze upon the skies through the lens of NASA's finest, and delve into tales as old as time itself, all served in a sleek GraphQL API.
+Embark on a cosmic journey with Morning Star, your gateway to the celestial wonders of Venus! This application searches for breathtaking images of Venus and intertwining them with enthralling myths of love and beauty from the Roman lore and its medieval interpretations. Gaze upon the skies through the lens of NASA's finest, and delve into tales as old as time itself, all served in a sleek GraphQL API.
 
 ## Prerequisites
 
@@ -13,11 +13,11 @@ Embark on a cosmic journey with Morning Star, your gateway to the celestial wond
 
 ### Docker config
 
-Our `Dockerfile` conjures up an Elixir environment as if by magic, while `docker-compose.yml` orchestrates a symphony of services, binding the Elixir app with the steadfast MariaDB for an unbreakable data duet.
+Our `Dockerfile` conjures up its environment as if by magic, while `docker-compose.yml` orchestrates a symphony of services, binding the Elixir app with the steadfast MariaDB for an unbreakable data duet.
 
 ## Running the application
 
-To launch your space odyssey:
+To ship our next story:
 
 ```bash
 docker compose up --build -d
@@ -31,27 +31,27 @@ Once upon a time, you'd manually set the stage for MariaDB:
 docker exec -it mariadb mysql -u root -prootpassword
 ```
 
-And with a flick of your wand (or keyboard), grant your Morning Star user full dominion:
+And with a flick of our keyboard, grant your Morning Star user full dominion:
 
 ```sql
 GRANT ALL PRIVILEGES ON *.* TO 'morning_star'@'%' WITH GRANT OPTION;
 FLUSH PRIVILEGES;
 ```
 
-From this moment forth, step into the application's command center with:
+Exit db shell; from this moment forth, step into the application's command center with:
 
 ```bash
-docker exec -it morning_star ash
+docker compose up -d && docker exec -it morning_star ash
 ```
 
-Now let Morning Star guide you through the cosmos and beyond at
+We just achieved the realms of response, _a.k.a_
 `http://localhost:4000/v1/graphql/ui`
 
 ## Queries and expectations
 
 ```graphql
-query GetVenusImages($startDate: String!, $endDate: String!) {
-  getVenusImages(startDate: $startDate, endDate: $endDate) {
+query getVenusImage($startDate: String!, $endDate: String!) {
+  getVenusImage(startDate: $startDate, endDate: $endDate) {
     dateCreated
     description
     imageUrl
@@ -59,17 +59,29 @@ query GetVenusImages($startDate: String!, $endDate: String!) {
     title
   }
 }
-```
+```s
 
 query variables
 
 ```json
 {
-  "startDate": "2021-01-01",
-  "endDate": "2021-01-31"
+  "startDate": "1999-06-12",
+  "endDate": "3056-12-31"
 }
 ```
 
-sucess
+success
 
 ![Screenshot from 2024-02-14 00-17-31](https://github.com/debora-be/morning-star/assets/72231462/c996b2cf-c71a-4104-97bd-9c06905af7c5)
+
+### Running tests
+
+```bash
+docker compose run morning_star_test mix test
+```
+
+### Tiny details
+
+When we try to query for recent images, we might not get any response. This is because the NASA API does not have any recent images of Venus. Every single image was worshiped and adored, and now they are all gone. We can only hope that the next image will be as beautiful as the ones we have seen so far.
+
+The article that is returned in the response comes from [SciHub](https://sci-hub.wf/10.2307/27707955).

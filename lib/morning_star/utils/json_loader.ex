@@ -5,14 +5,19 @@ defmodule MorningStar.Utils.JSONLoader do
     file_path
     |> File.read!()
     |> Jason.decode!()
-    |> Enum.each(&insert_venus_mythology/1)
+    |> Enum.each(fn %{"article_source" => source, "content" => content} ->
+      Enum.each(content, fn %{"fragment" => fragment} ->
+        insert_venus_mythology(fragment, source)
+      end)
+    end)
   end
 
-  defp insert_venus_mythology(%{"title" => title, "content" => content} = _attrs) do
+  defp insert_venus_mythology(fragment, source) do
     %MorningStar.Models.VenusMythology{
-      title: title,
-      content: content
+      article_source: source,
+      article_fragment: fragment
     }
-    |> MorningStar.Repo.insert()
+    |> MorningStar.Models.VenusMythology.changeset(%{})
+    |> RMorningStar.Repo.insert()
   end
 end
