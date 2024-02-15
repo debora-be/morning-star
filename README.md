@@ -72,7 +72,7 @@ query variables
 
 success
 
-![Screenshot from 2024-02-14 00-17-31](https://github.com/debora-be/morning-star/assets/72231462/c996b2cf-c71a-4104-97bd-9c06905af7c5)
+![Screenshot from 2024-02-14 20-59-27](https://github.com/debora-be/morning-star/assets/72231462/996d0b37-7666-45a4-8fe2-402c34db5cb1)
 
 ### Running tests
 
