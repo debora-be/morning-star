@@ -59,7 +59,7 @@ query getVenusImage($startDate: String!, $endDate: String!) {
     title
   }
 }
-```s
+```
 
 query variables
 
