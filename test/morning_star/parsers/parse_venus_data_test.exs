@@ -42,7 +42,8 @@ defmodule MorningStar.Parsers.ParseVenusDataTest do
           date_created: "2021-06-02T00:00:00Z",
           description:
             "This colorized picture of Venus was taken Feb. 14, 1990, from a distance of almost 1.7 million miles, about 6 days after NASA's Galileo made it closest approach to the planet.  http://photojournal.jpl.nasa.gov/catalog/PIA00111",
-          link: "https://images-assets.nasa.gov/image/PIA00111/PIA00111~thumb.jpg"
+          link: "https://images-assets.nasa.gov/image/PIA00111/PIA00111~thumb.jpg",
+          title: nil
         }
       ]
 

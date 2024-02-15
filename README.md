@@ -59,13 +59,13 @@ query getVenusImage($startDate: String!, $endDate: String!) {
     title
   }
 }
-```
+```s
 
 query variables
 
 ```json
 {
-  "startDate": "2020-06-12",
+  "startDate": "1999-06-12",
   "endDate": "3056-12-31"
 }
 ```

@@ -3,7 +3,7 @@ defmodule MorningStarWeb.Graphql.Resolvers.VenusResolver do
   This module is responsible for defining resolvers for Venus.
   """
 
-  def get_venus_images(_parent, args, _info) do
+  def get_venus_image(_parent, args, _info) do
     start_date = Date.from_iso8601!(args.start_date)
     end_date = Date.from_iso8601!(args.end_date)
 
@@ -23,7 +23,15 @@ defmodule MorningStarWeb.Graphql.Resolvers.VenusResolver do
     end
   end
 
-  def get_venus_stories(_parent, _args, _info) do
-    MorningStar.Models.VenusQueries.choose_story()
+  def get_venus_story(_parent, _args, _info) do
+    case MorningStar.Models.VenusQueries.stories() do
+      {:ok, content} ->
+        fragment = Enum.random(content)
+
+        {:ok, fragment}
+
+      {:error, :not_found} ->
+        {:error, :not_found}
+    end
   end
 end

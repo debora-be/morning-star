@@ -9,3 +9,5 @@
 #
 # We recommend using the bang functions (`insert!`, `update!`
 # and so on) as they will fail if something goes wrong.
+
+MorningStar.Utils.JSONLoader.load_json_to_db()
