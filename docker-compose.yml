@@ -1,6 +1,6 @@
 version: "3.8"
 services:
-  react-app:
+  react_app:
     build: ./morning_star_react
     ports:
       - "3000:3000"
@@ -8,6 +8,13 @@ services:
       - morning_star
     environment:
       - REACT_APP_GRAPHQL_URI=http://localhost:4000/v1/graphql
+    volumes:
+      - type: bind
+        source: ./morning_star_react
+        target: /usr/src/app
+    stdin_open: true 
+    tty: true        
+  
 
   morning_star:
     container_name: morning_star
