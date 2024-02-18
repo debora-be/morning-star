@@ -11,6 +11,8 @@ defmodule MorningStarWeb.Endpoint do
     same_site: "Lax"
   ]
 
+  plug CORSPlug, origin: ["http://localhost:3000"]
+
   socket "/live", Phoenix.LiveView.Socket, websocket: [connect_info: [session: @session_options]]
 
   # Serve at "/" the static files from "priv/static" directory.
