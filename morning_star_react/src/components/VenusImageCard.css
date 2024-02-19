@@ -1,0 +1,96 @@
+.venus-image-container {
+  display: flex;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  margin-bottom: 20px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  background: url('https://i.ibb.co/1znPZRX/venus-back.webp') no-repeat center center;
+  background-size: cover;
+  color: #fff;
+}
+
+.venus-title {
+  font-family: 'Alex Brush'; 
+  color: #ccc; 
+  font-size: 1em; 
+  text-align: right;
+  padding: 16px; 
+  margin: 0; 
+  background-color: rgba(0, 0, 0, 0.7); 
+}
+
+.venus-image-section {
+  width: 60%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.venus-image {
+  width: 100%;
+  height: auto;
+}
+
+.venus-description-section {
+  background-color: rgba(0, 0, 0, 0.5); 
+  padding: 16px;
+}
+
+.venus-description {
+  font-family: 'Orbitron', sans-serif; 
+  font-size: 0.7em; 
+  text-align: right;
+  margin: 0;
+  color: #ccc;
+}
+
+.venus-date {
+  font-family: 'Roboto', sans-serif; 
+  font-size: 0.7em; 
+  text-align: right;
+  margin: 0.2em;
+  color: #ccc;
+}
+
+.venus-mythology-section {
+  width: 40%;
+  display: flex;
+  align-items: center; 
+  justify-content: center; 
+  position: relative;
+}
+
+.manuscript-background {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.venus-mythology {
+  font-family: 'MedievalSharp', cursive;
+  font-size: 1.1em; 
+  color: #ffffff;
+  position: absolute;
+  text-align: left;
+  width: auto;
+  padding: 16px;
+  box-sizing: border-box;
+  background-color: rgba(193, 143, 64, 0.7); 
+}
+
+@media (max-width: 768px) {
+  .venus-image-container {
+    flex-direction: column;
+  }
+
+  .venus-image-section, .venus-mythology-section {
+    width: 100%;
+  }
+
+  .manuscript-background {
+    position: static;
+    background-size: cover;
+  }
+}

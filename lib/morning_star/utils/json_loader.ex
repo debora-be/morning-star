@@ -18,6 +18,6 @@ defmodule MorningStar.Utils.JSONLoader do
       article_fragment: fragment
     }
     |> MorningStar.Models.VenusMythology.changeset(%{})
-    |> RMorningStar.Repo.insert()
+    |> MorningStar.Repo.insert()
   end
 end
