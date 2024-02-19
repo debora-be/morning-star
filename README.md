@@ -4,75 +4,23 @@
 
 Embark on a cosmic journey with Morning Star, your gateway to the celestial wonders of Venus! This application searches for breathtaking images of Venus and intertwining them with enthralling myths of love and beauty from the Roman lore and its medieval interpretations. Gaze upon the skies through the lens of NASA's finest, and delve into tales as old as time itself, all served in a sleek GraphQL API.
 
+Once the application is running, you can access it in browser; each time we hit F5, a new image of Venus and a new story to go with it. We call [Astronomy Picture of the Day](https://api.nasa.gov/) API to fetch the images and academic papers to bring related stories.
+
 ## Prerequisites
 
 - Docker
 - Docker Compose
 
-## Setup
-
-### Docker config
-
-Our `Dockerfile` conjures up its environment as if by magic, while `docker-compose.yml` orchestrates a symphony of services, binding the Elixir app with the steadfast MariaDB for an unbreakable data duet.
-
 ## Running the application
-
-To ship our next story:
 
 ```bash
 docker compose up --build -d
 ```
 
-### Database initialization
+And now we got it all working out together! Access it in your browser at
+`http://localhost:3000`
 
-Once upon a time, you'd manually set the stage for MariaDB:
-
-```bash
-docker exec -it mariadb mysql -u root -prootpassword
-```
-
-And with a flick of our keyboard, grant your Morning Star user full dominion:
-
-```sql
-GRANT ALL PRIVILEGES ON *.* TO 'morning_star'@'%' WITH GRANT OPTION;
-FLUSH PRIVILEGES;
-```
-
-Exit db shell; from this moment forth, step into the application's command center with:
-
-```bash
-docker compose up -d && docker exec -it morning_star ash
-```
-
-We just achieved the realms of response, _a.k.a_
-`http://localhost:4000/v1/graphql/ui`
-
-## Queries and expectations
-
-```graphql
-query getVenusImage($startDate: String!, $endDate: String!) {
-  getVenusImage(startDate: $startDate, endDate: $endDate) {
-    dateCreated
-    description
-    imageUrl
-    thatDailyMythologicalStuff
-    title
-  }
-}
-```
-
-query variables
-
-```json
-{
-  "startDate": "1999-06-12",
-  "endDate": "3056-12-31"
-}
-```
-
-success
-
-![Screenshot from 2024-02-14 20-59-27](https://github.com/debora-be/morning-star/assets/72231462/996d0b37-7666-45a4-8fe2-402c34db5cb1)
+![Screenshot from 2024-02-18 20-09-35](https://github.com/debora-be/morning-star/assets/72231462/96fad7f4-e56b-4feb-a810-8ad4f7d27fe1)
 
 ### Running tests
 
