@@ -1,4 +1,4 @@
-FROM node:16-alpine
+FROM node:16
 
 WORKDIR /usr/src/app
 
@@ -8,11 +8,7 @@ RUN npm install
 
 COPY . .
 
-# RUN npm run build
-
-# RUN npm install -g serve
-
-# CMD ["serve", "-s", "build", "-l", "3000"]
+RUN npm run build
 
 EXPOSE 3000
 
